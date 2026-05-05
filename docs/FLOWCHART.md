@@ -8,21 +8,21 @@
 
 ```mermaid
 flowchart LR
-    Start([使用者開啟網頁]) --> Home[首頁 (儀表板)]
+    Start(["使用者開啟網頁"]) --> Home["首頁 (儀表板)"]
     
-    Home --> Action{選擇操作？}
+    Home --> Action{"選擇操作？"}
     
-    Action -->|查看總覽| Dashboard[顯示當前可用餘額與當月收支摘要]
-    Action -->|新增紀錄| AddForm[填寫收支/儲蓄表單]
-    Action -->|查看歷史| HistoryList[瀏覽歷史紀錄清單]
-    Action -->|查看圖表| ChartView[查看每月分類花費比例圖表]
+    Action -->|查看總覽| Dashboard["顯示當前可用餘額與當月收支摘要"]
+    Action -->|新增紀錄| AddForm["填寫收支/儲蓄表單"]
+    Action -->|查看歷史| HistoryList["瀏覽歷史紀錄清單"]
+    Action -->|查看圖表| ChartView["查看每月分類花費比例圖表"]
     
-    AddForm --> AddSubmit{選擇類別並送出}
-    AddSubmit -->|新增收入| SaveIncome[儲存收入紀錄]
-    AddSubmit -->|新增支出| SaveExpense[儲存支出紀錄 (含食衣住行育樂)]
-    AddSubmit -->|新增儲蓄| SaveSaving[儲存儲蓄紀錄]
+    AddForm --> AddSubmit{"選擇類別並送出"}
+    AddSubmit -->|新增收入| SaveIncome["儲存收入紀錄"]
+    AddSubmit -->|新增支出| SaveExpense["儲存支出紀錄 (含食衣住行育樂)"]
+    AddSubmit -->|新增儲蓄| SaveSaving["儲存儲蓄紀錄"]
     
-    SaveIncome --> ReturnHome[重新計算餘額並返回首頁/列表]
+    SaveIncome --> ReturnHome["重新計算餘額並返回首頁/列表"]
     SaveExpense --> ReturnHome
     SaveSaving --> ReturnHome
 ```
@@ -33,11 +33,11 @@ flowchart LR
 
 ```mermaid
 sequenceDiagram
-    actor User as 使用者
-    participant Browser as 瀏覽器
-    participant Flask as Flask Route (app.py / routes)
-    participant Model as Model (record.py)
-    participant DB as SQLite
+    actor User as "使用者"
+    participant Browser as "瀏覽器"
+    participant Flask as "Flask Route (app.py / routes)"
+    participant Model as "Model (record.py)"
+    participant DB as "SQLite"
 
     User->>Browser: 在首頁點擊「新增支出」，填寫金額與分類後送出表單
     Browser->>Flask: POST /record (帶有金額、日期、分類等資料)
