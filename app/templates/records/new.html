@@ -1,6 +1,90 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>新增紀錄</h2>
-<!-- TODO: 建立填寫表單 (包含 type, category, amount, date, description) -->
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm border-0 mt-3">
+            <div class="card-header bg-white border-bottom-0 pt-4 pb-2 text-center">
+                <h3 class="fw-bold mb-0"><i class="bi bi-pencil-square text-primary"></i> 新增紀錄</h3>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('main.create_record') }}" method="POST">
+                    
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">紀錄類型</label>
+                        <div class="d-flex gap-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" id="typeExpense" value="expense" checked>
+                                <label class="form-check-label text-danger fw-bold" for="typeExpense">支出</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" id="typeIncome" value="income">
+                                <label class="form-check-label text-success fw-bold" for="typeIncome">收入</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" id="typeSaving" value="saving">
+                                <label class="form-check-label text-warning fw-bold" for="typeSaving">儲蓄</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="category" class="form-label fw-semibold">分類</label>
+                        <select class="form-select" id="category" name="category" required>
+                            <option value="" selected disabled>請選擇分類...</option>
+                            <optgroup label="支出">
+                                <option value="食">食</option>
+                                <option value="衣">衣</option>
+                                <option value="住">住</option>
+                                <option value="行">行</option>
+                                <option value="育">育</option>
+                                <option value="樂">樂</option>
+                                <option value="其他支出">其他支出</option>
+                            </optgroup>
+                            <optgroup label="收入/儲蓄">
+                                <option value="薪水">薪水</option>
+                                <option value="獎金">獎金</option>
+                                <option value="存款">存款</option>
+                                <option value="其他">其他</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="amount" class="form-label fw-semibold">金額 (NT$)</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" class="form-control form-control-lg fw-bold text-primary" id="amount" name="amount" min="0" placeholder="0" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="date" class="form-label fw-semibold">日期</label>
+                        <input type="date" class="form-control" id="date" name="date" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="description" class="form-label fw-semibold">備註 (選填)</label>
+                        <textarea class="form-control" id="description" name="description" rows="2" placeholder="記下這筆錢的花費細節..."></textarea>
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-save"></i> 儲存紀錄</button>
+                        <a href="{{ url_for('main.index') }}" class="btn btn-light">取消</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // 預設自動填入今天的日期
+    document.addEventListener('DOMContentLoaded', function() {
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementById("date").value = today;
+    });
+</script>
 {% endblock %}
