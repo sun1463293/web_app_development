@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人記帳系統</title>
+</head>
+<body>
+    <nav>
+        <!-- 導覽列，之後會加上 url_for 連結 -->
+        <a href="/">總覽儀表板</a> |
+        <a href="/records">歷史紀錄</a> |
+        <a href="/records/new">新增紀錄</a> |
+        <a href="/analytics">圖表分析</a>
+    </nav>
+    <hr>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
